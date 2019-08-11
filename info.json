@@ -1,0 +1,11 @@
+{
+  "name": "KS_Combat",
+  "version": "0.1.0",
+  "title": "KS Combat",
+  "author": "Klonan",
+  "contact": "",
+  "homepage": "",
+  "description": "Base game Combat improvement mod",
+  "dependencies": ["base >= 0.17.50"],
+  "factorio_version": "0.17"
+}
