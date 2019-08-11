@@ -242,11 +242,17 @@ local make_capsule_throw = function(capsule_item)
 
 end
 
+--make_capsule_throw(data.raw.capsule["poison-capsule"])
+--make_capsule_throw(data.raw.capsule["slowdown-capsule"])
+--make_capsule_throw(data.raw.capsule["grenade"])
+--make_capsule_throw(data.raw.capsule["cluster-grenade"])
+--make_capsule_throw(data.raw.capsule["defender-capsule"])
+--make_capsule_throw(data.raw.capsule["distractor-capsule"])
+--make_capsule_throw(data.raw.capsule["destroyer-capsule"])
+--make_capsule_throw(data.raw.capsule["cliff-explosives"])
 
-make_capsule_throw(data.raw.capsule["poison-capsule"])
-make_capsule_throw(data.raw.capsule["slowdown-capsule"])
-make_capsule_throw(data.raw.capsule["grenade"])
-make_capsule_throw(data.raw.capsule["cluster-grenade"])
-make_capsule_throw(data.raw.capsule["defender-capsule"])
-make_capsule_throw(data.raw.capsule["distractor-capsule"])
-make_capsule_throw(data.raw.capsule["destroyer-capsule"])
+for k, capsule in pairs (data.raw.capsule) do
+  if capsule.capsule_action.type == "throw" then
+    make_capsule_throw(capsule)
+  end
+end

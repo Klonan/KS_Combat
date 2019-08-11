@@ -118,8 +118,8 @@ local make_bullet_entity = function(param)
         type = "projectile",
         projectile = param.name,
         starting_speed = 1,
-        direction_deviation = 0.01,
-        range_deviation = 0.01,
+        direction_deviation = 0.02,
+        range_deviation = 0.02,
         max_range = 24
       }
     }
@@ -166,6 +166,12 @@ local make_into_bullet = function(ammo_item)
   ammo_type.action = actions
 end
 
-make_into_bullet(data.raw.ammo["firearm-magazine"])
-make_into_bullet(data.raw.ammo["piercing-rounds-magazine"])
-make_into_bullet(data.raw.ammo["uranium-rounds-magazine"])
+for k, ammo in pairs (data.raw.ammo) do
+  if ammo.name:find("magazine") then
+    make_into_bullet(ammo)
+  end
+end
+--e
+--emake_into_bullet(data.raw.ammo["firearm-magazine"])
+--emake_into_bullet(data.raw.ammo["piercing-rounds-magazine"])
+--emake_into_bullet(data.raw.ammo["uranium-rounds-magazine"])

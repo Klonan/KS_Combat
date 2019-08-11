@@ -1,5 +1,5 @@
 -- Make rockets fly in an arc.
-
+error("Decided not to")
 
 ammo_type =
 {

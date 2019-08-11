@@ -1,0 +1,8 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.1.0
+Date: 2019-08-11
+  Changes:
+    - Initial commit.
+    - Magazines shoot real bullets.
+    - Gun turrets lead their target for the new bullets.
+    - Grenades and Capsules fly in an arc.
