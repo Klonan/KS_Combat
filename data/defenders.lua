@@ -106,12 +106,14 @@ local make_into_bullet = function(defender_prototype)
         }
         table.insert(actions, bullet)
         delivery.target_effects = nil
+        delivery.source_effects.type = "create-entity"
       end
     end
   end
 
   ammo_type.action = actions
   defender_prototype.attack_parameters.lead_target_for_projectile_speed = 1
+  defender_prototype.attack_parameters.projectile_center = {0, 0}
 end
 
 make_into_bullet(data.raw["combat-robot"].defender)
