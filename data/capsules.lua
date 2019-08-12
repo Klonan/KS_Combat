@@ -205,7 +205,7 @@ local make_capsule_stream = function(attack_parameters)
     particle_spawn_timeout = 1,
     particle_vertical_acceleration = 0.981 / 60,
     particle_horizontal_speed = root_speed,
-    particle_horizontal_speed_deviation = 0.01,
+    particle_horizontal_speed_deviation = 0.05,
     particle_start_alpha = 1,
     particle_end_alpha = 1,
     particle_start_scale = 1,
@@ -215,7 +215,8 @@ local make_capsule_stream = function(attack_parameters)
     smoke_sources = projectile_prototype.smoke,
     action = projectile_prototype.action,
     progress_to_create_smoke = 0,
-    oriented_particle = true
+    oriented_particle = true,
+    stream_light = projectile_prototype.light
   }
 
   data:extend{stream}
