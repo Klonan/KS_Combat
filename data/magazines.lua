@@ -104,6 +104,15 @@ local make_bullet_entity = function(param)
         height = 50,
         priority = "high"
       },
+      shadow =
+      {
+        filename = "__base__/graphics/entity/piercing-bullet/piercing-bullet.png",
+        frame_count = 1,
+        width = 3,
+        height = 50,
+        priority = "high",
+        draw_as_shadow = true
+      },
       hit_at_collision_position = true,
       force_condition = "not-same",
       light = {intensity = 0.6, size = 4, color = {r=1.0, g=1.0, b=0.5}},
