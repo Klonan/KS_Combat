@@ -198,8 +198,8 @@ local make_capsule_stream = function(attack_parameters)
   {
     type = "stream",
     name = projectile_prototype.name.."-stream",
-    particle = projectile_prototype.animation[1] or projectile_prototype.animation,
-    shadow = projectile_prototype.shadow[1] or projectile_prototype.shadow,
+    particle = (projectile_prototype.animation and projectile_prototype.animation[1]) or projectile_prototype.animation,
+    shadow = (projectile_prototype.shadow and projectile_prototype.shadow[1]) or projectile_prototype.shadow,
     particle_buffer_size = 1,
     particle_spawn_interval = 1,
     particle_spawn_timeout = 1,
