@@ -190,9 +190,9 @@ local make_capsule_stream = function(attack_parameters)
     root_projectile = ammo_type.action.action_delivery.projectile
     root_speed = ammo_type.action.action_delivery.starting_speed
   end
-  --if not root_projectile and root_speed then return end
+  if not root_projectile and root_speed then return end
   local projectile_prototype = data.raw.projectile[root_projectile]
-  --if not projectile_prototype then return end
+  if not projectile_prototype then return end
 
   local stream =
   {
@@ -238,6 +238,7 @@ end
 local make_capsule_throw = function(capsule_item)
   local action = capsule_item.capsule_action
   local attack_parameters = make_capsule_stream(action.attack_parameters)
+  if not attack_parameters then return end
   --error(serpent.block(attack_parameters))
   capsule_item.capsule_action.attack_parameters = attack_parameters
 
