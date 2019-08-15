@@ -194,18 +194,24 @@ local make_capsule_stream = function(attack_parameters)
   local projectile_prototype = data.raw.projectile[root_projectile]
   if not projectile_prototype then return end
 
+  root_speed = math.max(root_speed, 0.1)
+  --root_speed = root_speed + (300 * root_speed * (projectile_prototype.acceleration or 0))
+  if projectile_prototype.max_speed then
+    root_speed = math.min(root_speed, projectile_prototype.max_speed)
+  end
+
   local stream =
   {
     type = "stream",
     name = projectile_prototype.name.."-stream",
-    particle = projectile_prototype.animation[1] or projectile_prototype.animation,
-    shadow = projectile_prototype.shadow[1] or projectile_prototype.shadow,
+    particle = (projectile_prototype.animation and projectile_prototype.animation[1]) or projectile_prototype.animation,
+    shadow = (projectile_prototype.shadow and projectile_prototype.shadow[1]) or projectile_prototype.shadow,
     particle_buffer_size = 1,
     particle_spawn_interval = 1,
     particle_spawn_timeout = 1,
     particle_vertical_acceleration = 0.981 / 60,
     particle_horizontal_speed = root_speed,
-    particle_horizontal_speed_deviation = 0.05,
+    particle_horizontal_speed_deviation = root_speed * 0.1,
     particle_start_alpha = 1,
     particle_end_alpha = 1,
     particle_start_scale = 1,
