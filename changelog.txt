@@ -2,7 +2,7 @@
 Version: 0.1.2
 Date: 2019-08-15
   Changes:
-    - Fixed error on startup with incendiary ammo mod.
+    - Fixed error on startup with incendiary munitions mod.
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.1
 Date: 2019-08-14
