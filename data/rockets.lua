@@ -35,6 +35,8 @@ local make_rocket = function(rocket)
   rocket.collision_box = {{-0.05, -0.25}, {0.05, 0.25}}
   rocket.shadow = util.copy(rocket.animation)
   rocket.shadow.draw_as_shadow = true
+  rocket.hit_at_collision_position = true
+  rocket.force_condition = "not-same"
 end
 
 local make_rocket_ammo = function(ammo)
