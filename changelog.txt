@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.4
+Date: 2019-08-16
+  Changes:
+    - Fixed startup error to do with rockets and some mods.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.3
+Date: 2019-08-16
+  Changes:
+    - Made rocket and explosive rockets shoot like bullets. So they don't track the target, but hit things along the way.
+    - Atomic bombs fly in an arc.
+---------------------------------------------------------------------------------------------------
 Version: 0.1.2
 Date: 2019-08-15
   Changes:

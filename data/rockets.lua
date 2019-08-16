@@ -39,6 +39,9 @@ end
 
 local make_rocket_ammo = function(ammo)
 
+  --lazy boi is lazy
+  if not (ammo and ammo.ammo_type and ammo.ammo_type.action and ammo.ammo_type.action.action_delivery and ammo.ammo_type.action.action_delivery.projectile) then return end
+
   ammo.ammo_type.target_type = "position"
   ammo.ammo_type.clamp_position = "true"
 
