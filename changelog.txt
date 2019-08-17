@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.6
+Date: 2019-08-17
+  Changes:
+    - Made shotgun shells not hit friendly buildings.
+    - Made shotguns shoot with a variable spread.
+    - Made shotgun projectiles have a shadow and better sprite.
+    - Added a 1 second reload time to shotgun shells.
+    - Reduced the cooldown of shotguns by 50%.
+    - Reduced the movement slowdown of shotguns to 20% (from 60/50%).
+    - Made all guns have a stack size of 1.
+---------------------------------------------------------------------------------------------------
 Version: 0.1.5
 Date: 2019-08-16
   Changes:
