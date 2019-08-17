@@ -96,6 +96,91 @@ local old_projectile =
   }
 }
 
+local smoke_trail =
+{
+  type = "trivial-smoke",
+  name = "smoke-trail",
+  animation =
+  {
+    filename = "__base__/graphics/entity/smoke-fast/smoke-fast.png",
+    priority = "high",
+    width = 50,
+    height = 50,
+    frame_count = 16,
+    animation_speed = 16 / 60,
+    scale = 0.5
+  },
+  duration = 60,
+  fade_away_duration = 30
+}
+
+local fuse_smoke =
+{
+  type = "trivial-smoke",
+  name = "fuse-smoke",
+  animation =
+  {
+    filename = "__base__/graphics/entity/explosion/explosion-1.png",
+    priority = "high",
+    width = 64,
+    height = 59,
+    frame_count = 16,
+    animation_speed = 16/30,
+    scale = 0.33,
+    tint = {1, 1, 1, 0.5}
+    --blend_mode = "additive"
+  },
+  duration = 30,
+  fade_away_duration = 15
+}
+
+data:extend{
+  smoke_trail,
+  fuse_smoke
+}
+
+local smoke_source =
+{
+
+  {
+    name = fuse_smoke.name,
+    deviation = {0.15, 0.15},
+    frequency = 1,
+    position = {0, 0},
+    starting_frame = 3,
+    starting_frame_deviation = 5,
+    starting_frame_speed_deviation = 5
+  },
+  {
+    name = fuse_smoke.name,
+    deviation = {0.10, 0.10},
+    frequency = 1,
+    position = {0, 0},
+    starting_frame = 3,
+    starting_frame_deviation = 5,
+    starting_frame_speed_deviation = 5
+  },
+  {
+    name = smoke_trail.name,
+    deviation = {0.10, 0.10},
+    frequency = 1,
+    position = {0, 0},
+    starting_frame = 3,
+    starting_frame_deviation = 5,
+    starting_frame_speed_deviation = 5
+  },
+  {
+    name = smoke_trail.name,
+    deviation = {0.15, 0.15},
+    frequency = 1,
+    position = {0, 0},
+    starting_frame = 3,
+    starting_frame_deviation = 5,
+    starting_frame_speed_deviation = 5
+  },
+
+}
+
 local make_shell_stream = function(ammo_type)
   local root_projectile
   local root_speed
@@ -136,11 +221,28 @@ local make_shell_stream = function(ammo_type)
     shadow.draw_as_shadow = true
   end
 
+
+  local picture =
+  {
+    filename = "__base__/graphics/entity/artillery-projectile/hr-shell.png",
+    width = 64,
+    height = 64,
+    scale = 0.5
+  }
+
+  local shadow =
+  {
+    filename = "__base__/graphics/entity/artillery-projectile/hr-shell-shadow.png",
+    width = 64,
+    height = 64,
+    scale = 0.5
+  }
+
   local stream =
   {
     type = "stream",
     name = projectile_prototype.name.."-stream",
-    particle = (projectile_prototype.animation and projectile_prototype.animation[1]) or projectile_prototype.animation,
+    particle = picture,
     shadow = shadow,
     particle_buffer_size = 1,
     particle_spawn_interval = 1,
@@ -154,7 +256,7 @@ local make_shell_stream = function(ammo_type)
     particle_loop_frame_count = 1,
     particle_fade_out_threshold = 1,
     particle_loop_exit_threshold = 1,
-    smoke_sources = projectile_prototype.smoke,
+    smoke_sources = smoke_source,
     action = actions,
     progress_to_create_smoke = 0,
     oriented_particle = true,
