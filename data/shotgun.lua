@@ -97,23 +97,27 @@ local fix_shotgun_projectile = function(projectile_name)
     }
   }
 
-  projectile_prototype.animation =
-  {
-    filename = "__base__/graphics/entity/piercing-bullet/piercing-bullet.png",
-    frame_count = 1,
-    width = 3,
-    height = 50,
-    priority = "high"
-  }
-  projectile_prototype.shadow =
-  {
-    filename = "__base__/graphics/entity/piercing-bullet/piercing-bullet.png",
-    frame_count = 1,
-    width = 3,
-    height = 50,
-    priority = "high",
-    draw_as_shadow = true
-  }
+  if projectile_prototype.animation and (projectile_prototype.animation.filename == "__base__/graphics/entity/bullet/bullet.png" or projectile_prototype.animation.filename == "__base__/graphics/entity/piercing-bullet/piercing-bullet.png") then
+
+    projectile_prototype.animation =
+    {
+      filename = "__base__/graphics/entity/piercing-bullet/piercing-bullet.png",
+      frame_count = 1,
+      width = 3,
+      height = 50,
+      priority = "high"
+    }
+    projectile_prototype.shadow =
+    {
+      filename = "__base__/graphics/entity/piercing-bullet/piercing-bullet.png",
+      frame_count = 1,
+      width = 3,
+      height = 50,
+      priority = "high",
+      draw_as_shadow = true
+    }
+
+  end
 
 end
 
@@ -121,9 +125,9 @@ end
 local fix_shells = function(ammo_item)
   local ammo_type = ammo_item.ammo_type
   ammo_type.target_type = "position"
-  --ammo_type.clamp_position = true
+  ammo_type.clamp_position = true
 
-  local action = ammo_type.action
+  local action = ammo_type.action and ammo_type.action[1] and ammo_type.action or {ammo_type.action}
 
   for k, effect in pairs(action) do
     local projectile
