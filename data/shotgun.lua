@@ -153,7 +153,7 @@ end
 
 local fix_shotgun_gun = function(gun_item)
   gun_item.attack_parameters.cooldown = gun_item.attack_parameters.cooldown * 0.66
-  gun_item.attack_parameters.movement_slow_down_factor = 0.2
+  --gun_item.attack_parameters.movement_slow_down_factor = 0.2
   gun_item.attack_parameters.min_range = 2
 end
 
