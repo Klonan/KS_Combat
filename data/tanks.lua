@@ -111,7 +111,44 @@ local smoke_trail =
     scale = 0.5
   },
   duration = 60,
-  fade_away_duration = 30
+  fade_away_duration = 30,
+  show_when_smoke_off = true
+}
+
+local explode_sprites =
+{
+  {
+    filename = "__base__/graphics/entity/explosion/explosion-1.png",
+    priority = "high",
+    width = 64,
+    height = 59,
+    frame_count = 16,
+    animation_speed = 0.5
+  },
+  {
+    filename = "__base__/graphics/entity/explosion/explosion-2.png",
+    priority = "high",
+    width = 64,
+    height = 57,
+    frame_count = 16,
+    animation_speed = 0.5
+  },
+  {
+    filename = "__base__/graphics/entity/explosion/explosion-3.png",
+    priority = "high",
+    width = 64,
+    height = 49,
+    frame_count = 16,
+    animation_speed = 0.5
+  },
+  {
+    filename = "__base__/graphics/entity/explosion/explosion-4.png",
+    priority = "high",
+    width = 64,
+    height = 51,
+    frame_count = 16,
+    animation_speed = 0.5
+  }
 }
 
 local fuse_smoke =
@@ -126,12 +163,13 @@ local fuse_smoke =
     height = 59,
     frame_count = 16,
     animation_speed = 16/30,
-    scale = 0.33,
-    tint = {1, 1, 1, 0.5}
+    scale = 0.25,
     --blend_mode = "additive"
   },
+  color = {1, 1, 1, 0.5},
   duration = 30,
-  fade_away_duration = 15
+  fade_away_duration = 15,
+  show_when_smoke_off = true
 }
 
 data:extend{
@@ -141,42 +179,21 @@ data:extend{
 
 local smoke_source =
 {
-
-  {
-    name = fuse_smoke.name,
-    deviation = {0.15, 0.15},
-    frequency = 1,
-    position = {0, 0},
-    starting_frame = 3,
-    starting_frame_deviation = 5,
-    starting_frame_speed_deviation = 5
-  },
-  {
-    name = fuse_smoke.name,
-    deviation = {0.10, 0.10},
-    frequency = 1,
-    position = {0, 0},
-    starting_frame = 3,
-    starting_frame_deviation = 5,
-    starting_frame_speed_deviation = 5
-  },
   {
     name = smoke_trail.name,
     deviation = {0.10, 0.10},
     frequency = 1,
     position = {0, 0},
-    starting_frame = 3,
-    starting_frame_deviation = 5,
-    starting_frame_speed_deviation = 5
+    starting_frame = 2,
+    starting_frame_deviation = 1,
   },
   {
-    name = smoke_trail.name,
-    deviation = {0.15, 0.15},
+    name = fuse_smoke.name,
+    deviation = {0.05, 0.05},
     frequency = 1,
     position = {0, 0},
-    starting_frame = 3,
-    starting_frame_deviation = 5,
-    starting_frame_speed_deviation = 5
+    starting_frame = 2,
+    starting_frame_deviation = 1,
   },
 
 }
@@ -203,7 +220,7 @@ local make_shell_stream = function(ammo_type)
   for k, action in pairs (actions) do
     if action.type == "direct" then
       action.type = "area"
-      action.radius = 1
+      action.radius = 1.5
       local dupe = util.copy(action)
       dupe.target_entities = false
       table.insert(actions, dupe)
@@ -258,9 +275,10 @@ local make_shell_stream = function(ammo_type)
     particle_loop_exit_threshold = 1,
     smoke_sources = smoke_source,
     action = actions,
-    progress_to_create_smoke = 0,
+    progress_to_create_smoke = 0.03,
     oriented_particle = true,
-    stream_light = projectile_prototype.light
+    stream_light = {intensity = 1, size = 4, color = {r=1.0, g=1.0, b=0.5}},
+    ground_light = {intensity = 0.4, size = 15, color = {r=1.0, g=1.0, b=0.5}},
   }
 
   data:extend{stream}
@@ -302,3 +320,10 @@ for k, gun in pairs (data.raw.gun) do
     make_cannon_gun(gun)
   end
 end
+
+local fix_tank = function(tank)
+  --Its stupid it takes so long
+  tank.turret_rotation_speed = 0.35 / 10
+end
+
+fix_tank(data.raw.car.tank)
