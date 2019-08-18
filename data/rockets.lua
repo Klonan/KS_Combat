@@ -42,16 +42,21 @@ end
 local make_rocket_ammo = function(ammo)
 
   --lazy boi is lazy
-  if not (ammo and ammo.ammo_type and ammo.ammo_type.action and ammo.ammo_type.action.action_delivery and ammo.ammo_type.action.action_delivery.projectile) then return end
+
 
   ammo.ammo_type.target_type = "position"
   ammo.ammo_type.clamp_position = "true"
 
+  if not (ammo and ammo.ammo_type and ammo.ammo_type.action and ammo.ammo_type.action) then return end
 
-  ammo.ammo_type.action.action_delivery.starting_speed = rocket_speed
-  local projectile = ammo.ammo_type.action.action_delivery.projectile
+  local ammo_type = ammo.ammo_type
 
-  make_rocket(data.raw.projectile[projectile])
+  for k, action in pairs (ammo_type.action and ammo_type.action[1] and ammo_type.action or {ammo_type.action}) do
+    if action.action_delivery and action.action_delivery.projectile then
+      action.action_delivery.starting_speed = rocket_speed
+      make_rocket(data.raw.projectile[action.action_delivery.projectile])
+    end
+  end
 
 end
 

@@ -1,5 +1,7 @@
 --We want to turn the hitscan auto aim into a fun dakka dakka shoot with bullets thing.
 
+local bullet_speed = 1
+
 local base_bullet =
 {
   type = "projectile",
@@ -126,7 +128,7 @@ local make_bullet_entity = function(param)
       {
         type = "projectile",
         projectile = param.name,
-        starting_speed = 1,
+        starting_speed = bullet_speed,
         direction_deviation = 0.02,
         range_deviation = 0.02,
         max_range = 24
@@ -135,21 +137,6 @@ local make_bullet_entity = function(param)
   }
 end
 
-
-local shotgun_delivery =
-{
-  type = "direct",
-  repeat_count = 16,
-  action_delivery =
-  {
-    type = "projectile",
-    projectile = "piercing-shotgun-pellet",
-    starting_speed = 1,
-    direction_deviation = 0.3,
-    range_deviation = 0.3,
-    max_range = 15
-  }
-}
 
 local make_ammo_type = function(ammo_type, name)
 
