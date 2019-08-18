@@ -202,7 +202,7 @@ local smoke_source =
 local make_shell_stream = function(ammo_type)
   local root_projectile
   local root_speed
-  if ammo_type and ammo_type.action and ammo_type.action.action_delivery.type == "projectile" then
+  if ammo_type and ammo_type.action and ammo_type.action.action_delivery and ammo_type.action.action_delivery.type == "projectile" then
     root_projectile = ammo_type.action.action_delivery.projectile
     root_speed = ammo_type.action.action_delivery.starting_speed
   end

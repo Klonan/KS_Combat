@@ -151,25 +151,31 @@ local shotgun_delivery =
   }
 }
 
-local make_into_bullet = function(ammo_item)
-  local ammo_type = ammo_item.ammo_type
+local make_ammo_type = function(ammo_type, name)
+
   ammo_type.target_type = "direction"
 
   local actions = (ammo_type.action and ammo_type.action[1] and ammo_type.action) or {ammo_type.action}
 
+  local new_target_effects = {}
   for k, action in pairs (actions) do
     local action_deliverys = action.action_delivery and action.action_delivery[1] and action.action_delivery or {action.action_delivery}
     for k, delivery in pairs (action_deliverys) do
       if delivery.target_effects then
-        local bullet = make_bullet_entity
-        {
-          target_effects = delivery.target_effects,
-          name = ammo_item.name
-        }
-        table.insert(actions, bullet)
+        for k, effect in pairs (delivery.target_effects and delivery.target_effects[1] and delivery.target_effects or {delivery.target_effects}) do
+          table.insert(new_target_effects, effect)
+        end
         delivery.target_effects = nil
       end
     end
+  end
+  if next(new_target_effects) then
+    local bullet = make_bullet_entity
+    {
+      target_effects = new_target_effects,
+      name = name
+    }
+    table.insert(actions, bullet)
   end
 
   ammo_type.action = actions
@@ -177,10 +183,19 @@ end
 
 for k, ammo in pairs (data.raw.ammo) do
   if ammo.name:find("magazine") then
-    make_into_bullet(ammo)
+    make_ammo_type(ammo.ammo_type, ammo.name)
   end
 end
 --e
 --emake_into_bullet(data.raw.ammo["firearm-magazine"])
 --emake_into_bullet(data.raw.ammo["piercing-rounds-magazine"])
 --emake_into_bullet(data.raw.ammo["uranium-rounds-magazine"])
+
+--error(serpent.block(data.raw.ammo["incendiary-rounds-magazine"]))
+
+-- Rampant bullet armor
+
+local equipment = data.raw["active-defense-equipment"]["bullets-passive-defense-rampant-arsenal"]
+if equipment then
+  make_ammo_type(equipment.attack_parameters.ammo_type, equipment.name)
+end

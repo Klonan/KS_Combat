@@ -6,6 +6,8 @@ Date: 2019-08-18
     - Made cannon shells look nicer.
     - Made tank turret rotate faster.
     - Incresed cannon shell range from 30 -> 36.
+    - Fixed a bug with Incendiary munitions mod.
+    - Made Rampant arsenal bullet defense equipment shoot bullets.
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.6
 Date: 2019-08-17
