@@ -1,6 +1,7 @@
 -- Make shells shoot in an arc.
 
 local shell_speed = 0.5
+local shell_range = 36
 
 
 local old_stuff =
@@ -312,7 +313,7 @@ for k, ammo in pairs (data.raw.ammo) do
 end
 
 local make_cannon_gun = function(gun_item)
-  gun_item.attack_parameters.range = 36
+  gun_item.attack_parameters.range = shell_range
 end
 
 for k, gun in pairs (data.raw.gun) do

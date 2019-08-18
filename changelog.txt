@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.7
+Date: 2019-08-18
+  Changes:
+    - Made cannon shells shoot in an arc.
+    - Made cannon shells look nicer.
+    - Made tank turret rotate faster.
+    - Incresed cannon shell range from 30 -> 36.
+---------------------------------------------------------------------------------------------------
 Version: 0.1.6
 Date: 2019-08-17
   Changes:
