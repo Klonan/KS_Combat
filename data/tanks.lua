@@ -224,6 +224,9 @@ local make_shell_stream = function(ammo_type)
       action.radius = 1.5
       local dupe = util.copy(action)
       dupe.target_entities = false
+      for k, effect in pairs (dupe.action_delivery.target_effects) do
+        effect.show_in_tooltip = false
+      end
       table.insert(actions, dupe)
     end
   end
@@ -263,7 +266,7 @@ local make_shell_stream = function(ammo_type)
     particle = picture,
     shadow = shadow,
     particle_buffer_size = 1,
-    particle_spawn_interval = 1,
+    particle_spawn_interval = 0,
     particle_spawn_timeout = 1,
     particle_vertical_acceleration = 0.981 / 100,
     particle_horizontal_speed = shell_speed,
@@ -317,7 +320,7 @@ local make_cannon_gun = function(gun_item)
 end
 
 for k, gun in pairs (data.raw.gun) do
-  if gun.name:find("cannon") then
+  if gun.name:find("cannon") and not gun.name:find("artillery") then
     make_cannon_gun(gun)
   end
 end

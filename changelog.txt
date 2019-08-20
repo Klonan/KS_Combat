@@ -1,4 +1,13 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.10
+Date: 2019-08-20
+  Changes:
+    - Fixed unintentionally affecting artillery turret range.
+    - Fixed DPS in tooltip was wildly high for things that fly in an arc.
+    - Made biter groups path with a lower resolution, which means they find a path quicker.
+    - Made biters path with a lower resolution, so they path quicker.
+    - Made biters not collide with eachother, significantly improving their movement and behavior.
+---------------------------------------------------------------------------------------------------
 Version: 0.1.9
 Date: 2019-08-18
   Changes:
