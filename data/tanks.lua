@@ -224,8 +224,10 @@ local make_shell_stream = function(ammo_type)
       action.radius = 1.5
       local dupe = util.copy(action)
       dupe.target_entities = false
-      for k, effect in pairs (dupe.action_delivery.target_effects) do
-        effect.show_in_tooltip = false
+      if dupe.action_delivery and dupe.action_delivery.target_effects then
+        for k, effect in pairs (dupe.action_delivery.target_effects) do
+          effect.show_in_tooltip = false
+        end
       end
       table.insert(actions, dupe)
     end
