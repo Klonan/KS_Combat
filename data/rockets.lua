@@ -39,23 +39,28 @@ local make_rocket = function(rocket)
   rocket.force_condition = "not-same"
 end
 
-local make_rocket_ammo = function(ammo)
-
-  --lazy boi is lazy
-
-
-  ammo.ammo_type.target_type = "position"
-  ammo.ammo_type.clamp_position = "true"
-
-  if not (ammo and ammo.ammo_type and ammo.ammo_type.action and ammo.ammo_type.action) then return end
-
-  local ammo_type = ammo.ammo_type
+local fix_ammo_type = function(ammo_type)
+  ammo_type.target_type = "position"
+  ammo_type.clamp_position = "true"
 
   for k, action in pairs (ammo_type.action and ammo_type.action[1] and ammo_type.action or {ammo_type.action}) do
     if action.action_delivery and action.action_delivery.projectile then
       action.action_delivery.starting_speed = rocket_speed
       make_rocket(data.raw.projectile[action.action_delivery.projectile])
     end
+  end
+end
+
+local make_rocket_ammo = function(ammo)
+
+  local ammo_type = ammo.ammo_type
+
+  if ammo_type[1] then
+    for k, type in pairs (ammo_type) do
+      fix_ammo_type(type)
+    end
+  else
+    fix_ammo_type(ammo_type)
   end
 
 end
