@@ -30,6 +30,7 @@ local old = {
 }
 
 local make_rocket = function(rocket)
+  if not rocket then return end
   rocket.direction_only = false
   rocket.acceleration = 0
   rocket.collision_box = {{-0.05, -0.25}, {0.05, 0.25}}
@@ -44,7 +45,7 @@ local fix_ammo_type = function(ammo_type)
   ammo_type.clamp_position = "true"
 
   for k, action in pairs (ammo_type.action and ammo_type.action[1] and ammo_type.action or {ammo_type.action}) do
-    if action.action_delivery and action.action_delivery.projectile then
+    if action.action_delivery and action.action_delivery.projectile and data.raw.projectile[action.action_delivery.projectile] then
       action.action_delivery.starting_speed = rocket_speed
       make_rocket(data.raw.projectile[action.action_delivery.projectile])
     end
