@@ -31,7 +31,7 @@ local old = {
 
 local make_rocket = function(rocket)
   if not rocket then return end
-  rocket.direction_only = false
+  rocket.direction_only = settings.startup.aim_assist.value
   rocket.acceleration = 0
   rocket.collision_box = {{-0.05, -0.25}, {0.05, 0.25}}
   rocket.shadow = util.copy(rocket.animation)
@@ -41,15 +41,29 @@ local make_rocket = function(rocket)
 end
 
 local fix_ammo_type = function(ammo_type)
-  ammo_type.target_type = "position"
-  ammo_type.clamp_position = "true"
+
+
+  if settings.startup.aim_assist.value then
+    ammo_type.target_type = "entity"
+    for k, gun in pairs (data.raw.gun) do
+      local type = gun.attack_parameters.ammo_category
+      if type == ammo_type.category then
+        gun.attack_parameters.lead_target_for_projectile_speed = rocket_speed
+      end
+    end
+  else
+    ammo_type.target_type = "direction"
+    ammo_type.clamp_position = "true"
+  end
 
   for k, action in pairs (ammo_type.action and ammo_type.action[1] and ammo_type.action or {ammo_type.action}) do
     if action.action_delivery and action.action_delivery.projectile and data.raw.projectile[action.action_delivery.projectile] then
       action.action_delivery.starting_speed = rocket_speed
+      action.action_delivery.max_range = settings.startup.aim_assist.value and 40
       make_rocket(data.raw.projectile[action.action_delivery.projectile])
     end
   end
+
 end
 
 local make_rocket_ammo = function(ammo)

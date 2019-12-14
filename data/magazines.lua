@@ -140,7 +140,17 @@ end
 
 local make_ammo_type = function(ammo_type, name)
 
-  ammo_type.target_type = "direction"
+  if settings.startup.aim_assist.value then
+    ammo_type.target_type = "entity"
+    for k, gun in pairs (data.raw.gun) do
+      local type = gun.attack_parameters.ammo_category
+      if type == ammo_type.category then
+        gun.attack_parameters.lead_target_for_projectile_speed = bullet_speed
+      end
+    end
+  else
+    ammo_type.target_type = "direction"
+  end
 
   local actions = (ammo_type.action and ammo_type.action[1] and ammo_type.action) or {ammo_type.action}
 

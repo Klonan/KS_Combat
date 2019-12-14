@@ -1,11 +1,11 @@
 {
   "name": "KS_Combat",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "title": "KS Combat",
   "author": "Klonan",
   "contact": "",
   "homepage": "",
   "description": "Base game Combat improvement mod",
-  "dependencies": ["base >= 0.17.50", "?RampantArsenal", "?Krastorio"],
+  "dependencies": ["base >= 0.17.0", "?RampantArsenal", "?Krastorio"],
   "factorio_version": "0.17"
 }
